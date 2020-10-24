@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Biudžeto įrašai: </h1>
+{%for irasas in biudzetas%}
+<p>{{irasas}}</p>
+{% endfor %}
+{% endblock %}
