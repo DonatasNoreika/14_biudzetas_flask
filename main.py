@@ -32,5 +32,14 @@ def sarasas():
         print(biudzetas)
         return render_template("sarasas.html", biudzetas=biudzetas)
 
+@app.route("/balansas")
+def balansas():
+        biudzetas = Irasas.query.all()
+        balansas = 0
+        for irasas in biudzetas:
+            balansas += irasas.suma
+        print(biudzetas)
+        return render_template("balansas.html", balansas=balansas)
+
 if __name__ == "__main__":
     app.run(debug=True)
