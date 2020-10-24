@@ -48,5 +48,17 @@ def irasas_delete(id):
     db.session.commit()
     return redirect(url_for('sarasas'))
 
+@app.route("/irasas_update/<int:id>", methods=['GET', 'POST'])
+def irasas_update(id):
+    if request.method == "POST":
+        irasas = db.session.query(Irasas).get(id)
+        irasas.suma = request.form['suma']
+        irasas.info = request.form['info']
+        db.session.commit()
+        return redirect(url_for('sarasas'))
+    elif request.method == "GET":
+        irasas = db.session.query(Irasas).get(id)
+        return render_template("redaguoti.html", irasas=irasas)
+
 if __name__ == "__main__":
     app.run(debug=True)
