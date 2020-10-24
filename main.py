@@ -29,7 +29,6 @@ def prideti():
 @app.route("/")
 def sarasas():
         biudzetas = Irasas.query.all()
-        print(biudzetas)
         return render_template("sarasas.html", biudzetas=biudzetas)
 
 @app.route("/balansas")
@@ -38,7 +37,6 @@ def balansas():
         balansas = 0
         for irasas in biudzetas:
             balansas += irasas.suma
-        print(biudzetas)
         return render_template("balansas.html", balansas=balansas)
 
 @app.route("/irasas_delete/<int:id>")
