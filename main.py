@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, render_template, url_for
+from flask import Flask, request, render_template, url_for, redirect
 from flask_sqlalchemy import SQLAlchemy
 
 if __name__ == "__main__":
@@ -34,12 +34,19 @@ def sarasas():
 
 @app.route("/balansas")
 def balansas():
-        biudzetas = Irasas.query.all()
+        biudzetas = db.session.query(Irasas).all()
         balansas = 0
         for irasas in biudzetas:
             balansas += irasas.suma
         print(biudzetas)
         return render_template("balansas.html", balansas=balansas)
+
+@app.route("/irasas_delete/<int:id>")
+def irasas_delete(id):
+    uzklausa = db.session.query(Irasas).get(id)
+    db.session.delete(uzklausa)
+    db.session.commit()
+    return redirect(url_for('sarasas'))
 
 if __name__ == "__main__":
     app.run(debug=True)
